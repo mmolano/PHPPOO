@@ -14,13 +14,20 @@ trait snakeCase
 
     public function snakeCase()
     {
+        if(preg_match("/[-,_, ]/", $this->string)){
         return $this
             ->replace('-', ' ')
+            ->ucwords()
             ->replace(' ', '_')
-            ->preg_replace("/(.)(?=[A-Z])/", '$1_')
-            ->replace('__', '_')
             ->strlower()
             ;
+    } else {
+            return $this
+                ->preg_replace("/(.)(?=[A-Z])/", '$1_', $this->string)
+                ->strlower();
+        }
+
+
     }
 
 

@@ -16,13 +16,19 @@ trait slugCase
     public function slugCase()
     {
 
+
+        if(preg_match("/[-,_, ]/", $this->string)){
             return $this
-                ->replace('_',' ')
-                ->replace(' ', '-')
+                ->replace('_', ' ')
                 ->ucwords()
-                ->preg_replace("/(.)(?=[A-Z])/", '$1-')
-                ->replace('--', '-')
+                ->replace(' ', '-')
                 ->strlower();
+        }else {
+                return $this
+                ->preg_replace("/(.)(?=[A-Z])/", '$1-', $this->string)
+                    ->strlower();
+
+        }
 
 
     }
